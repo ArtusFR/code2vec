@@ -31,6 +31,7 @@ class Code2Vec(nn.Module):
         #c = [batch size, embedding dim * 3, max length]
 
         x = torch.tanh(torch.bmm(W, c))                  # Full connectected layer
+        # améloration use nn.Linear(int=embedding*3 , out=embedding, bais=false) w/o permutation (ajout d'un terme de biais ?)
         #x = [batch size, embedding dim, max length]
         
         x = x.permute(0, 2, 1)                           # c~i transpose
@@ -54,7 +55,7 @@ class Code2Vec(nn.Module):
         v = torch.bmm(x, z).squeeze(2)         # embding
         #v = [batch size, embedding dim]
         
-        out = self.out(v)                      # PB ici
+        out = self.out(v)                      # PB ici (ajout d'un terme de biais)
         #out = [batch size, output dim]
 
         return out
