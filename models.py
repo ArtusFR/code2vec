@@ -36,13 +36,13 @@ class Code2Vec(nn.Module):
         x = x.permute(0, 2, 1)                           # c~i transpose
         #x = [batch size, max length, embedding dim]
         
-        a = self.a.repeat(starts.shape[0], 1, 1)                 # Attention
+        a = self.a.repeat(starts.shape[0], 1, 1)         # Attention
         #a = [batch size, embedding dim, 1]
 
         z = torch.bmm(x, a).squeeze(2)          # c~i transpose * a
         #z = [batch size, max length]
 
-        z = F.softmax(z, dim=1)
+        z = F.softmax(z, dim=1)                 # alpha i
         #z = [batch size, max length]
         
         z = z.unsqueeze(2)
@@ -51,10 +51,10 @@ class Code2Vec(nn.Module):
         x = x.permute(0, 2, 1)
         #x = [batch size, embedding dim, max length]
         
-        v = torch.bmm(x, z).squeeze(2)
+        v = torch.bmm(x, z).squeeze(2)         # embding
         #v = [batch size, embedding dim]
         
-        out = self.out(v)
+        out = self.out(v)                      # PB ici
         #out = [batch size, output dim]
 
         return out
