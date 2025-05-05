@@ -10,7 +10,7 @@ class Code2Vec(nn.Module):
         self.path_embedding = nn.Embedding(paths_dim, embedding_dim)
         self.W = nn.Parameter(torch.randn(1, embedding_dim, 3*embedding_dim))
         self.a = nn.Parameter(torch.randn(1, embedding_dim, 1))
-        self.out = nn.Linear(embedding_dim, output_dim)
+        self.out = nn.Linear(embedding_dim, output_dim, bias=False)
         self.do = nn.Dropout(dropout)
         
     def forward(self, starts, paths, ends):
