@@ -1,0 +1,3 @@
+
+
+java -cp .\JavaExtractor\JPredict\target\JavaExtractor-0.0.1-SNAPSHOT.jar JavaExtractor.App  --max_path_length 8 --max_path_width 2 --dir C:\Users\ARTUS\DocumentsAmoi\stagePFE\code\data\small\java-small-brut\java-small\validation\libgdx > a.raw.txt
