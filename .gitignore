@@ -95,6 +95,11 @@ venv.bak/
 .spyderproject
 .spyproject
 
+# Intenlij
+.idea
+
+*.raw.*
+
 # Rope project settings
 .ropeproject
 
