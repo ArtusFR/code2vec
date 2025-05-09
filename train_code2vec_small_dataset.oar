@@ -1,0 +1,41 @@
+#/bin/bash
+################################################################################
+# simple.oar - exemple de batch permettant de lancer le programme
+# simpleSequentiel.sh sur un coeur et en réservant ce coeur pour 10 minutes max
+# Utilisation du répertoire courant pour les entrées/sorties
+#
+# Usage: oarsub -S ./simple.oar
+#
+# Note: les directives OAR commencent par #OAR pour les mettre en commentaires
+# il faut utiliser un double #
+################################################################################
+#-----------------------------------------------------------
+# Les directives OAR
+#-----------------------------------------------------------
+# donner un nom au job
+#OAR -n train_code2vec_small_dataset
+# les ressources
+##OAR -l /host=1,walltime=300
+#OAR -l /host=1/gpu=1,walltime=72
+##OAR -p network_address = "orval34"
+#OAR -p gpumodel = 'A100'
+# la file de soumission
+##OAR -q default
+# notification par mail ou script
+##OAR --notify mail:oumaima.bel-moudden@univ-littoral.fr
+# redirection des sorties standard stdout et stderr
+# par défaut redirection vers OAR.%jobid%.stdout et OAR.%jobid%.stderr
+# dans le répertoire courant
+#OAR -O train_code2vec_small_dataset.out
+#OAR -E train_code2vec_small_dataset.err
+# mode besteffort et restart automatique
+#OAR -t besteffort
+#OAR -t idempotent
+#-----------------------------------------------------------
+# exemple d'execution du programme
+#-----------------------------------------------------------
+source /nfs/opt/env/env.sh
+module load conda
+module load cuda/cuda-11.8
+conda activate code2vec-pytorch
+python3 train_code2vec_small_dataset.py
